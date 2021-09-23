@@ -13,4 +13,10 @@ public class SystemOutLogger extends Logger {
 		addHandler(handler);
 	}
 
+	/** Creates an anonymous Logger */
+	public SystemOutLogger() {
+		this(null);
+	}
+
+
 }
