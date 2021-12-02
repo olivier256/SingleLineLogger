@@ -11,11 +11,12 @@ import java.util.logging.SimpleFormatter;
 /** @see SimpleFormatter */
 public class SingleLineFormatter extends Formatter {
 
-	private static final String FORMAT = "%1$tb %1$td, %1$tY %1$tl:%1$tM:%1$tS %1$Tp %2$s %4$s: %5$s";
+	private static final String FORMAT = "%1$tb %1$td, %1$tY %1$tk:%1$tM:%1$tS %2$s %3$s: %4$s";
 
 	@Override
 	public String format(LogRecord logRecord) {
-		ZonedDateTime zdt = ZonedDateTime.ofInstant(logRecord.getInstant(), ZoneId.systemDefault());
+		long millis = logRecord.getMillis();
+		LocalDateTime ldt = LocalDateTime.ofEpochSecond(millis / 1000, 0, ZoneOffset.ofHours(+1));
 		String source;
 		if (logRecord.getSourceClassName() != null) {
 			source = logRecord.getSourceClassName();
@@ -35,8 +36,7 @@ public class SingleLineFormatter extends Formatter {
 			pw.close();
 			throwable = sw.toString();
 		}
-		String localizedName = logRecord.getLevel().getLocalizedName();
-		return String.format(FORMAT, zdt, source, logRecord.getLoggerName(), localizedName, message, throwable);
+		return String.format(FORMAT, ldt, source, logRecord.getLoggerName(), message, throwable);
 	}
 
 }
