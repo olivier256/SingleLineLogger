@@ -14,6 +14,11 @@ public class SystemOutHandler extends Handler {
 		if (level == Level.SEVERE || level == Level.WARNING) {
 			System.err.println(msg);
 		} else {
+			/**
+			 * By default, we don't log Level < INFO
+			 * 
+			 * @see java.util.logging.Logger.ConfigurationData
+			 */
 			System.out.println(msg);
 		}
 	}
