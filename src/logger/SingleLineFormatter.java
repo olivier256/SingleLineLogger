@@ -2,8 +2,8 @@ package logger;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
